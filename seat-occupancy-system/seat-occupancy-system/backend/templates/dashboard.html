@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seat Occupancy — Console</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-mark">
+      <span class="led led--live" id="engine-led"></span>
+      <span class="auth-mark-text">SEAT&nbsp;OCC</span>
+      <span class="topbar-tag">console</span>
+    </div>
+    <div class="topbar-right">
+      <span class="topbar-user">{{ username }}</span>
+      <a class="btn-ghost" href="{{ url_for('logout') }}">Sign out</a>
+    </div>
+  </header>
+
+  <main class="grid-shell">
+
+    <section class="panel panel--chairs">
+      <div class="panel-head">
+        <h2>Chair status</h2>
+        <span class="panel-sub" id="chair-count">— chairs tracked</span>
+      </div>
+      <div class="seat-grid" id="seat-grid">
+        <p class="empty-note">Waiting for the first detection…</p>
+      </div>
+    </section>
+
+    <section class="panel panel--camera">
+      <div class="panel-head">
+        <h2>Live view</h2>
+        <span class="panel-sub">annotated detector feed</span>
+      </div>
+      <div class="camera-frame">
+        <img src="{{ url_for('video_feed') }}" alt="Live camera feed" class="camera-img">
+      </div>
+    </section>
+
+    <section class="panel panel--stats">
+      <div class="panel-head">
+        <h2>Summary</h2>
+        <span class="panel-sub">all-time</span>
+      </div>
+      <div class="stat-row">
+        <div class="stat">
+          <span class="stat-value" id="stat-total-sessions">0</span>
+          <span class="stat-label">sit sessions</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value" id="stat-avg-duration">0m</span>
+          <span class="stat-label">avg. duration</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value" id="stat-total-duration">0h</span>
+          <span class="stat-label">total occupied time</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel panel--chart">
+      <div class="panel-head">
+        <h2>Occupied time by day</h2>
+        <span class="panel-sub">last 14 days</span>
+      </div>
+      <canvas id="chart-by-day" height="140"></canvas>
+    </section>
+
+    <section class="panel panel--chart">
+      <div class="panel-head">
+        <h2>Occupied time by chair</h2>
+        <span class="panel-sub">all-time</span>
+      </div>
+      <canvas id="chart-by-chair" height="140"></canvas>
+    </section>
+
+    <section class="panel panel--table">
+      <div class="panel-head">
+        <h2>Recent sessions</h2>
+        <span class="panel-sub" id="session-count">—</span>
+      </div>
+      <div class="table-wrap">
+        <table class="data-table" id="sessions-table">
+          <thead>
+            <tr><th>Chair</th><th>Start</th><th>End</th><th>Duration</th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+</body>
+<footer>
+  <p>Powered by Magellanic Cloud Private Limited</p>
+</footer>
+</html>

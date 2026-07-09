@@ -1,0 +1,6 @@
+flask==3.0.3
+flask-login==0.6.3
+opencv-python==4.10.0.84
+ultralytics==8.3.0
+numpy==1.26.4
+werkzeug==3.0.3

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seat Occupancy — Sign in</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="auth-body">
+  <div class="auth-card">
+    <div class="auth-mark">
+      <span class="led led--live"></span>
+      <span class="auth-mark-text">SEAT&nbsp;OCC</span>
+    </div>
+    <h1 class="auth-title">Sign in to the console</h1>
+    <p class="auth-sub">Occupancy monitoring &amp; session analytics</p>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="auth-error">{{ messages[0] }}</div>
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST" class="auth-form">
+      <label class="field-label" for="username">Username</label>
+      <input class="field-input" type="text" id="username" name="username" autocomplete="username" required autofocus>
+
+      <label class="field-label" for="password">Password</label>
+      <input class="field-input" type="password" id="password" name="password" autocomplete="current-password" required>
+
+      <button class="btn-primary" type="submit">Enter console</button>
+    </form>
+
+    <p class="auth-hint">Default credentials: <code>admin</code> / <code>admin123</code></p>
+  </div>
+</body>
+</html>
